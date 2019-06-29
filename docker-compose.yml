@@ -1,0 +1,14 @@
+version: '3.7'
+services:
+  nginx:
+    image: nginx:1.17
+    volumes:
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+      - ./static:/usr/share/nginx/html
+    ports:
+      - 8080:80
+  auth_backend:
+    image: node:10-stretch
+    volumes:
+      - ./auth_backend/:/home/node/app
+    command: node /home/node/app/main.js
